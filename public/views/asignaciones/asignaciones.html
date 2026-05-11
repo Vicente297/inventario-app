@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Asignaciones</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <a href="#" onclick="history.back()">Volver</a>
+      <a href="#" onclick="logout()"> Cerrar sesión </a>
+    </div>
+
+    <div class="layout">
+      <div class="sidebar">
+        <a href="/views/equipos/equipo.html"> Inicio </a>
+        <a href="/views/usuarios/usuarios.html">Usuarios</a>
+        <a href="/views/asignaciones/asignaciones.html">Asignaciones</a>
+        <a href="/views/tecnicos/tecnicos.html">Tecnicos</a>
+      </div>
+
+      <div class="main">
+        <div class="container text-center">
+          <h1>Página de Asignaciones</h1>
+
+          <a href="/views/asignaciones/formAsignaciones.html">
+            <button class="btn btn-guardar">Asignar equipo</button>
+          </a>
+        </div>
+
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>ID</th>
+                  <th>Equipo asignado</th>
+                  <th>Usuario</th>
+                  <th>Entregado por</th>
+                  <th>Fecha de entrega</th>
+                  <th>Fecha de recepcion</th>
+                </tr>
+              </thead>
+              <tbody id="tablaAsignaciones"></tbody>
+            </table>
+
+            <script src="/js/app.js"></script>
+          <script src="/js/asignaciones/asignaciones.js"></script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

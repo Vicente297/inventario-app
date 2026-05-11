@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <a href="#" onclick="history.back()"> Volver </a>
+      <a href="#" onclick="logout()"> Cerrar sesión </a>
+    </div>
+
+    <div class="layout">
+      <div class="sidebar">
+        <a href="/views/equipos/equipo.html"> Inicio </a>
+        <a href="/views/usuarios/usuarios.html">Usuarios</a>
+        <a href="/views/asignaciones/asignaciones.html">Asignaciones</a>
+        <a href="/views/tecnicos/tecnicos.html">Tecnicos</a>
+      </div>
+
+      <div class="main">
+        <div class="container text-center">
+          <h1>Página de Usuarios</h1>
+          <a href="/views/usuarios/formUsuario.html">
+            <button class="btn btn-guardar">Agregar Usuario</button>
+          </a>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Telefono</th>
+              <th>Departamento</th>
+              <th>Direccion</th>
+              <th>Cargo</th>
+            </tr>
+          </thead>
+          <tbody id="tablaUsuarios"></tbody>
+        </table>
+
+        <script src="/js/app.js"></script>
+        <script src="/js/usuarios/usuarios.js"></script>
+      </div>
+    </div>
+  </body>
+</html>

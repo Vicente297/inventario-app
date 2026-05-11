@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Agregar Técnico</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="#" onclick="history.back()"> Volver </a>
+      <a href="#" onclick="logout()"> Cerrar sesión </a>
+    </div>
+
+    <div class="layout">
+      <div class="sidebar">
+        <a href="/views/equipos/equipo.html"> Inicio </a>
+        <a href="/views/usuarios/usuarios.html">Usuarios</a>
+        <a href="/views/asignaciones/asignaciones.html">Asignaciones</a>
+        <a href="/views/tecnicos/tecnicos.html">Tecnicos</a>
+      </div>
+
+      <div class="main">
+        <div class="container text-center">
+          <h1>Agregar Técnico</h1>
+        </div>
+
+        <div class="container">
+          <form id="formTecnico" novalidate>
+            <div class="form-group">
+              <label for="nombre">Nombre:</label>
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                placeholder="Nombre"
+                minlength="3"
+              />
+              <small class="mensaje-error" id="errorNombre"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Correo"
+              />
+              <small class="mensaje-error" id="errorEmail"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input
+                type="text"
+                id="telefono"
+                name="telefono"
+                placeholder="+56 9"
+              />
+              <small class="mensaje-error" id="errorTelefono"></small>
+            </div>
+
+            <div class="btn-container">
+              <button class="btn btn-guardar" type="submit">Guardar</button>
+              <a href="/views/tecnicos/tecnicos.html">
+                <button class="btn btn-cancelar" type="button">Cancelar</button>
+              </a>
+            </div>
+          </form>
+        </div>
+
+        <script src="/js/app.js"></script>
+        <script src="/js/tecnicos/formTecnico.js"></script>
+      </div>
+    </div>
+  </body>
+</html>

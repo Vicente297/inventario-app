@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Inventario</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="#" onclick="history.back()"> Volver </a>
+      <a href="#" onclick="logout()"> Cerrar sesión </a>
+    </div>
+
+    <div class="layout">
+      <div class="sidebar">
+        <a href="/views/equipos/equipo.html"> Inicio </a>
+        <a href="/views/usuarios/usuarios.html">Usuarios</a>
+        <a href="/views/asignaciones/asignaciones.html">Asignaciones</a>
+        <a href="/views/tecnicos/tecnicos.html">Tecnicos</a>
+      </div>
+
+      <div class="main">
+        <div class="container text-center">
+          <h1>Inventario</h1>
+          <a href="/views/equipos/formEquipo.html">
+            <button class="btn btn-guardar">Agregar Equipo</button>
+          </a>
+        </div>
+        <div class="controls">
+          <input
+            type="text"
+            id="busquedaSerie"
+            placeholder="Buscar por serie..."
+            class="input-busqueda"
+          />
+          <button class="btn btn-orden" onclick="alternarOrden()">
+            Ordenar por garantía
+          </button>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th>ID</th>
+              <th>Tipo</th>
+              <th>Modelo</th>
+              <th>Serie</th>
+              <th>Procesador</th>
+              <th>Ram</th>
+              <th>Disco</th>
+              <th>Sistema Operativo</th>
+              <th>Estado</th>
+              <th>Factura</th>
+              <th>Proveedor</th>
+              <th>Entrega del proveedor</th>
+              <th>Valor</th>
+              <th>Garantia</th>
+              <th>Termino de la garantia</th>
+              <th>Comentario</th>
+            </tr>
+          </thead>
+          <tbody id="tablaEquipos"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/equipos/equipos.js"></script>
+  </body>
+</html>

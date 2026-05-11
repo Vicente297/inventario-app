@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Detalle Asignación</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <a href="#" onclick="history.back()"> Volver </a>
+      <a href="#" onclick="logout()"> Cerrar sesión </a>
+    </div>
+
+        <div class="layout">
+      <div class="sidebar">
+        <a href="/views/equipos/equipo.html"> Inicio </a>
+        <a href="/views/usuarios/usuarios.html">Usuarios</a>
+        <a href="/views/asignaciones/asignaciones.html">Asignaciones</a>
+        <a href="/views/tecnicos/tecnicos.html">Tecnicos</a>
+      </div>
+
+    <div class="container">
+      <h1 class="text-center">Detalle de Asignación</h1>
+
+      <div id="detalleAsignacion"></div>
+    </div>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/asignaciones/detalleAsignacion.js"></script>
+  </body>
+</html>

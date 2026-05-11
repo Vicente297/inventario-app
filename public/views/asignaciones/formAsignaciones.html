@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Asignaciones</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="#" onclick="history.back()"> Volver </a>
+      <a href="#" onclick="logout()"> Cerrar sesión </a>
+    </div>
+
+    <div class="layout">
+      <div class="sidebar">
+        <a href="/views/equipos/equipo.html"> Inicio </a>
+        <a href="/views/usuarios/usuarios.html">Usuarios</a>
+        <a href="/views/asignaciones/asignaciones.html">Asignaciones</a>
+        <a href="/views/tecnicos/tecnicos.html">Tecnicos</a>
+      </div>
+
+      <div class="main">
+        <div class="container text-center">
+          <h1>Asignaciones</h1>
+        </div>
+
+        <div class="container">
+          <form id="formAsignacion" novalidate>
+            <div class="form-group">
+              <label>Serie del equipo:</label>
+              <input
+                type="text"
+                id="serie"
+                list="listaEquipos"
+                placeholder="Buscar serie"
+              />
+              <datalist id="listaEquipos"></datalist>
+              <small class="mensaje-error" id="errorSerie"></small>
+            </div>
+
+            <div class="form-group">
+              <label>Usuario asignado:</label>
+              <input
+                type="text"
+                id="usuario"
+                list="listaUsuarios"
+                placeholder="Buscar usuario"
+              />
+              <datalist id="listaUsuarios"></datalist>
+              <small class="mensaje-error" id="errorUsuario"></small>
+            </div>
+
+            <div class="form-group">
+              <label>Entregado por:</label>
+              <input
+                type="text"
+                id="tecnico"
+                list="listaTecnicos"
+                placeholder="Tecnico"
+              />
+              <datalist id="listaTecnicos"></datalist>
+              <small class="mensaje-error" id="errorTecnico"></small>
+            </div>
+
+            <div class="form-group">
+              <label>Fecha de entrega:</label>
+              <input type="date" id="entrega" />
+              <small class="mensaje-error" id="errorEntrega"></small>
+            </div>
+
+            <div class="form-group">
+              <label>Fecha de recepcion:</label>
+              <input type="date" id="recepcion" />
+              <small class="mensaje-error" id="errorRecepcion"
+                >*Puede quedar vacio</small
+              >
+            </div>
+
+            <div class="btn-container">
+              <button class="btn btn-guardar" type="submit">Guardar</button>
+              <a href="/views/asignaciones/asignaciones.html">
+                <button class="btn btn-cancelar" type="button">Cancelar</button>
+              </a>
+            </div>
+          </form>
+        </div>
+
+        <script src="/js/app.js"></script>
+        <script src="/js/asignaciones/formAsignacion.js"></script>
+      </div>
+    </div>
+  </body>
+</html>

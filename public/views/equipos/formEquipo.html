@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Agregar / Editar Equipo</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="#" onclick="history.back()"> Volver </a>
+      <a href="#" onclick="logout()"> Cerrar sesión </a>
+    </div>
+
+    <div class="layout">
+      <div class="sidebar">
+        <a href="/views/equipos/equipo.html"> Inicio </a>
+        <a href="/views/usuarios/usuarios.html">Usuarios</a>
+        <a href="/views/asignaciones/asignaciones.html">Asignaciones</a>
+        <a href="/views/tecnicos/tecnicos.html">Tecnicos</a>
+      </div>
+
+      <div class="main">
+        <h1 class="container text-center">Agregar / Editar Equipo</h1>
+
+        <div class="container">
+          <form id="formEquipo" novalidate>
+            <div class="form-group">
+              <label>Tipo:</label>
+              <select id="tipo_equipo" required>
+                <option value="" disabled selected>Seleccionar estado</option>
+                <option value="Notebook">Notebook</option>
+                <option value="PC Escritorio">PC Escritorio</option>
+                <option value="Servidor">Servidor</option>
+                <option value="Tablet">Tablet</option>
+                <option value="Impresora">Impresora</option>
+              </select>
+              <small class="mensaje-error" id="errorTipoEquipo"></small>
+            </div>
+
+            <div class="form-group">
+              <label>Modelo:</label>
+              <select id="id_modelo" required>
+                <option value="" disabled selected>Seleccionar modelo</option>
+                <option value="1">Dell Latitude 5420</option>
+                <option value="2">HP Pavilion 15</option>
+                <option value="3">Lenovo ThinkPad X1</option>
+              </select>
+              <small class="mensaje-error" id="errorModelo"></small>
+            </div>
+
+            <div class="form-group">
+              <label>Serie:</label>
+              <input type="text" id="serie" required />
+              <small class="mensaje-error" id="errorSerie"></small>
+            </div>
+
+            <div class="form-group">
+              <label>Procesador:</label>
+              <input
+                type="text"
+                id="procesador"
+                placeholder="Intel i5"
+                required
+              />
+              <small class="mensaje-error" id="errorProcesador"></small>
+            </div>
+
+            <div class="form-group">
+              <label>RAM:</label>
+              <input type="number" id="ram" min="0" placeholder="16" required />
+              <small class="mensaje-error" id="errorRam"></small>
+            </div>
+
+            <div class="form-group">
+              <label>Disco:</label>
+              <select id="disco" required>
+                <option value="" disabled selected>Seleccionar disco</option>
+                <option value="128">128 GB</option>
+                <option value="256">256 GB</option>
+                <option value="500">500 GB</option>
+                <option value="1024">1 TB</option>
+              </select>
+              <small class="mensaje-error" id="errorDisco"></small>
+            </div>
+
+            <div class="form-group">
+              <label>Sistema Operativo:</label>
+              <select id="id_sistema_operativo" required>
+                <option value="" disabled selected>
+                  Seleccionar sistema operativo
+                </option>
+                <option value="1">Windows 11</option>
+                <option value="2">Windows 10</option>
+                <option value="3">Ubuntu 22.04</option>
+                <option value="4">macOS Sonoma</option>
+              </select>
+              <small class="mensaje-error" id="errorSistema"></small>
+            </div>
+
+            <div class="form-group">
+              <label>Estado:</label>
+              <select id="id_estado" required>
+                <option value="" disabled selected>Seleccionar estado</option>
+                <option value="1">Disponible</option>
+                <option value="2">Nuevo</option>
+                <option value="3">Asignado</option>
+                <option value="4">En reparación</option>
+                <option value="5">Dañado</option>
+                <option value="6">Robado</option>
+                <option value="7">Dado de baja</option>
+              </select>
+              <small class="mensaje-error" id="errorEstado"></small>
+            </div>
+
+            <div class="form-group">
+              <label>Factura:</label>
+              <input type="text" id="factura" required />
+              <small class="mensaje-error" id="errorFactura"></small>
+            </div>
+
+            <div class="form-group">
+              <label>Proveedor:</label>
+              <select id="id_proveedor" required>
+                <option value="" disabled selected>
+                  Seleccionar proveedor
+                </option>
+                <option value="1">Dell</option>
+                <option value="2">HP Store</option>
+                <option value="3">Lenovo</option>
+                <option value="4">Asus Store</option>
+                <option value="5">Acer</option>
+                <option value="6">Samsung</option>
+                <option value="7">Apple</option>
+                <option value="8">PC Factory</option>
+                <option value="9">SP Digital</option>
+              </select>
+              <small class="mensaje-error" id="errorProveedor"></small>
+            </div>
+
+            <div class="form-group">
+              <label>Entrega del proveedor:</label>
+              <input type="date" id="entregaProveedor" required />
+              <small class="mensaje-error" id="errorEntrega"></small>
+            </div>
+
+            <div class="form-group">
+              <label>Valor:</label>
+              <input
+                type="number"
+                id="valor"
+                placeholder="500000"
+                min="0"
+                required
+              />
+              <small class="mensaje-error" id="errorValor"></small>
+            </div>
+
+            <div class="form-group">
+              <label>Garantia:</label>
+              <input
+                type="number"
+                id="garantia"
+                placeholder="12 meses"
+                min="0"
+                required
+              />
+              <small class="mensaje-error" id="errorGarantia"></small>
+            </div>
+
+            <div class="form-group">
+              <label>Termino de garantia:</label>
+              <input type="date" id="terminoGarantia" required />
+              <small class="mensaje-error" id="errorTerminoGarantia"></small>
+            </div>
+
+            <div class="form-group">
+              <label>Comentario:</label>
+              <textarea id="comentario"></textarea>
+            </div>
+
+            <div class="btn-container">
+              <button class="btn btn-guardar" type="submit">Guardar</button>
+              <a href="/index.html">
+                <button class="btn btn-cancelar" type="button">Cancelar</button>
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/equipos/formEquipo.js"></script>
+  </body>
+</html>

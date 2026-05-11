@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Agregar Usuario</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="#" onclick="history.back()"> Volver </a>
+      <a href="#" onclick="logout()"> Cerrar sesión </a>
+    </div>
+
+    <div class="layout">
+      <div class="sidebar">
+        <a href="/views/equipos/equipo.html"> Inicio </a>
+        <a href="/views/usuarios/usuarios.html">Usuarios</a>
+        <a href="/views/asignaciones/asignaciones.html">Asignaciones</a>
+        <a href="/views/tecnicos/tecnicos.html">Tecnicos</a>
+      </div>
+
+      <div class="main">
+          <h1 class="container text-center">Agregar Usuario</h1>
+
+          <div class="container">
+            <form id="formUsuario" novalidate>
+              <div class="form-group">
+                <label>Nombre:</label>
+                <input type="text" id="nombre" placeholder="Nombre" />
+                <small class="mensaje-error" id="errorNombre"></small>
+              </div>
+
+              <div class="form-group">
+                <label>Email:</label>
+                <input type="text" id="email" placeholder="Correo" />
+                <small class="mensaje-error" id="errorEmail"></small>
+              </div>
+
+              <div class="form-group">
+                <label>Telefono:</label>
+                <input
+                  type="text"
+                  name="telefono"
+                  id="telefono"
+                  placeholder="+56 9"
+                />
+                <small class="mensaje-error" id="errorTelefono"></small>
+              </div>
+
+              <div class="form-group">
+                <label>Departamento:</label>
+                <select id="departamento">
+                  <option value="" disabled selected>
+                    Seleccionar departamento
+                  </option>
+                  <option value="1">TI</option>
+                  <option value="2">Recursos Humanos</option>
+                  <option value="3">Finanzas</option>
+                </select>
+
+                <small class="mensaje-error" id="errorDepartamento"></small>
+              </div>
+
+              <div class="form-group">
+                <label>Direccion:</label>
+                <input type="text" id="direccion" placeholder="Direccion" />
+
+                <small class="mensaje-error" id="errorDireccion"></small>
+              </div>
+
+              <div class="form-group">
+                <label>Cargo:</label>
+                <input type="text" id="cargo" placeholder="Empleado" />
+
+                <small class="mensaje-error" id="errorCargo"></small>
+              </div>
+
+              <div class="btn-container">
+                <button class="btn btn-guardar" type="submit">Guardar</button>
+
+                <a href="/views/usuarios/usuarios.html">
+                  <button class="btn btn-cancelar" type="button">
+                    Cancelar
+                  </button>
+                </a>
+              </div>
+            </form>
+          </div>
+
+          <script src="/js/app.js"></script>
+          <script src="/js/usuarios/formUsuario.js"></script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
