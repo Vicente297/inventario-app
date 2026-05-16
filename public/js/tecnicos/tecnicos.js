@@ -41,7 +41,7 @@ async function eliminarTecnico(id) {
       alert("Eliminado correctamente");
     } else {
       const errorData = await response.json();
-      alert("Error: " + errorData.error);
+      alert("Error: " + errorData.message);
     }
   } catch (error) {
     console.error("Fetch error:", error);

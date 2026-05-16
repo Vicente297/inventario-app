@@ -91,12 +91,10 @@ form.addEventListener("submit", async (e) => {
     if (!res.ok) {
       throw new Error(data.mensaje || "Error al guardar técnico");
     }
-
     alert(
       data.mensaje ||
         (id ? "Tecnico actualizado con exito" : "Tecnico creado con exito"),
     );
-
     window.location.href = "/views/tecnicos/tecnicos.html";
   } catch (error) {
     alert("Error al guardar el tecnico");

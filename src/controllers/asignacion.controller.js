@@ -9,12 +9,13 @@ const getAsignaciones = async (req, res) => {
         e.serie,
         u.nombre AS nombre_usuario,
         t.nombre AS nombre_tecnico,
-        TO_CHAR(a.fecha_entrega, 'DD-MM-YYYY') AS fecha_entrega,
-        TO_CHAR(a.fecha_recepcion, 'DD-MM-YYYY') AS fecha_recepcion
+        TO_CHAR(a.fecha_entrega, 'YYYY-MM-DD') AS fecha_entrega,
+        TO_CHAR(a.fecha_recepcion, 'YYYY-MM-DD') AS fecha_recepcion
       FROM Asignacion a
       JOIN Equipo e ON a.id_equipo = e.id_equipo
       JOIN Usuario u ON a.id_usuario = u.id_usuario
       JOIN Tecnico t ON a.id_tecnico = t.id_tecnico
+      ORDER BY a.id_asignacion ASC
     `);
     res.json(result.rows);
   } catch (error) {
@@ -31,51 +32,59 @@ const getAsignacionById = async (req, res) => {
     const result = await db.query(
       `
       SELECT
-      a.id_asignacion,
+        a.id_asignacion,
 
-      e.tipo_equipo,
-      m.nombre_modelo,
-      e.serie,
-      e.procesador,
-      e.ram,
-      e.disco,
-      so.nombre || ' ' || so.version AS sistema_operativo,
+        a.id_equipo,
+        a.id_usuario,
+        a.id_tecnico,
 
-      u.nombre AS nombre_usuario,
-      u.cargo,
-      d.nombre_departamento AS departamento,
-      u.direccion,
+        e.tipo_equipo,
+        m.nombre_modelo,
+        e.serie,
+        e.procesador,
+        e.ram,
+        e.disco,
 
-      t.nombre AS nombre_tecnico,
+        so.nombre || ' ' || so.version AS sistema_operativo,
 
-      TO_CHAR(a.fecha_entrega, 'DD-MM-YYYY') AS fecha_entrega,
-      TO_CHAR(a.fecha_recepcion, 'DD-MM-YYYY') AS fecha_recepcion
+        u.nombre AS nombre_usuario,
+        u.cargo,
+        d.nombre_departamento AS departamento,
+        u.direccion,
+
+        t.nombre AS nombre_tecnico,
+
+        TO_CHAR(a.fecha_entrega, 'YYYY-MM-DD') AS fecha_entrega,
+        TO_CHAR(a.fecha_recepcion, 'YYYY-MM-DD') AS fecha_recepcion
       
       FROM Asignacion a
       JOIN Equipo e
-      ON a.id_equipo = e.id_equipo
+        ON a.id_equipo = e.id_equipo
       JOIN ModeloEquipo m
-      ON e.id_modelo = m.id_modelo
+        ON e.id_modelo = m.id_modelo
       LEFT JOIN SistemaOperativo so
-      ON e.id_sistema_operativo = so.id_sistema_operativo
+        ON e.id_sistema_operativo = so.id_sistema_operativo
       JOIN Usuario u 
-      ON a.id_usuario = u.id_usuario
+        ON a.id_usuario = u.id_usuario
       JOIN Departamento d 
-      ON u.id_departamento = d.id_departamento
+        ON u.id_departamento = d.id_departamento
       JOIN Tecnico t
-      ON a.id_tecnico = t.id_tecnico
+        ON a.id_tecnico = t.id_tecnico
       WHERE a.id_asignacion = $1
       `,
       [id],
     );
-
     if (result.rows.length === 0) {
-      return res.status(404).json({ message: "Asignación no encontrada" });
+      return res.status(404).json({
+        message: "Asignación no encontrada",
+      });
     }
     res.json(result.rows[0]);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error al obtener la asignación" });
+    res.status(500).json({
+      message: "Error al obtener la asignación",
+    });
   }
 };
 

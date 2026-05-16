@@ -1,7 +1,11 @@
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
 const form = document.getElementById("formAsignacion");
 const listaEquipos = document.getElementById("listaEquipos");
 const listaUsuarios = document.getElementById("listaUsuarios");
 const listaTecnicos = document.getElementById("listaTecnicos");
+
 let equipos = [];
 let usuarios = [];
 let tecnicos = [];
@@ -63,6 +67,28 @@ async function cargarTecnicos() {
   }
 }
 
+async function cargarAsignacion() {
+  try {
+    const res = await fetch(`/api/asignaciones/${id}`);
+    if (!res.ok) {
+      throw new Error("No se pudo obtener la asignación");
+    }
+
+    const data = await res.json();
+    const equipo = equipos.find((e) => e.id_equipo === data.id_equipo);
+    const usuario = usuarios.find((u) => u.id_usuario === data.id_usuario);
+    const tecnico = tecnicos.find((t) => t.id_tecnico === data.id_tecnico);
+
+    document.getElementById("serie").value = equipo?.serie || "";
+    document.getElementById("usuario").value = usuario?.nombre || "";
+    document.getElementById("tecnico").value = tecnico?.nombre || "";
+    document.getElementById("entrega").value = data.fecha_entrega || "";
+    document.getElementById("recepcion").value = data.fecha_recepcion || "";
+  } catch (error) {
+    console.error("Error al cargar asignación:", error);
+  }
+}
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -77,6 +103,7 @@ form.addEventListener("submit", async (e) => {
   const errorTecnico = document.getElementById("errorTecnico");
   const errorEntrega = document.getElementById("errorEntrega");
   const errorRecepcion = document.getElementById("errorRecepcion");
+
   errorSerie.textContent = "";
   errorUsuario.textContent = "";
   errorTecnico.textContent = "";
@@ -93,6 +120,7 @@ form.addEventListener("submit", async (e) => {
     hayErrores = true;
   } else if (!equipo) {
     errorSerie.textContent = "*Equipo no encontrado";
+    alert("Equipo no encontrado");
     hayErrores = true;
   }
 
@@ -104,6 +132,7 @@ form.addEventListener("submit", async (e) => {
     hayErrores = true;
   } else if (!usuario) {
     errorUsuario.textContent = "*Usuario no encontrado";
+    alert("Usuario no encontrado");
     hayErrores = true;
   }
 
@@ -116,11 +145,13 @@ form.addEventListener("submit", async (e) => {
     hayErrores = true;
   } else if (!tecnico) {
     errorTecnico.textContent = "*Técnico no encontrado";
+    alert("Técnico no encontrado");
     hayErrores = true;
   }
 
   if (!entrega) {
-    errorEntrega.textContent = "*Seleccione fecha de entrega";
+    errorEntrega.textContent = "*Seleccione una fecha de entrega";
+    alert("Seleccione una fecha de entrega");
     hayErrores = true;
   }
 
@@ -141,20 +172,27 @@ form.addEventListener("submit", async (e) => {
   };
 
   try {
-    const res = await fetch("/api/asignaciones", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const res = await fetch(
+      id ? `/api/asignaciones/${id}` : "/api/asignaciones",
+      {
+        method: id ? "PUT" : "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(asignacion),
       },
-      body: JSON.stringify(asignacion),
-    });
+    );
 
     const data = await res.json();
     if (!res.ok) {
       throw new Error(data.message || "Error al guardar la asignación");
     }
-    alert("Asignación creada correctamente");
-
+    alert(
+      data.message ||
+        (id
+          ? "Asignación actualizada correctamente"
+          : "Asignación creada correctamente"),
+    );
     window.location.href = "/views/asignaciones/asignaciones.html";
   } catch (error) {
     console.error(error);
@@ -162,6 +200,12 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
-cargarEquipos();
-cargarUsuarios();
-cargarTecnicos();
+async function iniciar() {
+  await cargarEquipos();
+  await cargarUsuarios();
+  await cargarTecnicos();
+  if (id) {
+    await cargarAsignacion();
+  }
+}
+iniciar();

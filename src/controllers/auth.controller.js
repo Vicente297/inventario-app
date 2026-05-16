@@ -2,12 +2,11 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const db = require("../config/db");
 
-const SECRET = "clave_secreta";
+const SECRET = "clave";
 
 const login = async (req, res) => {
   try {
     const { usuario, password } = req.body;
-
     const result = await db.query(
       "SELECT * FROM usuarios_login WHERE usuario = $1",
       [usuario],
@@ -18,10 +17,8 @@ const login = async (req, res) => {
         message: "Usuario incorrecto",
       });
     }
-
     const user = result.rows[0];
 
-    // Comparar contraseña ingresada con la encriptada
     const passwordValida = await bcrypt.compare(password, user.password);
     if (!passwordValida) {
       return res.status(401).json({

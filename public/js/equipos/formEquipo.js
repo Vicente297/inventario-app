@@ -198,6 +198,6 @@ form.addEventListener("submit", async (e) => {
     window.location.href = "/views/equipos/equipo.html";
   } catch (error) {
     console.error(error);
-    alert("Error al guardar el equipo");
+    alert(error.message);
   }
 });

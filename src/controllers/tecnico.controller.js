@@ -142,8 +142,8 @@ const deleteTecnico = async (req, res) => {
     }
 
     res.json({ message: "Técnico eliminado" });
-  } catch (err) {
-    res.status(500).send("Error al eliminar al tecnico");
+  } catch (error) {
+    res.status(500).json({ message: "Error al eliminar al tecnico" });
   }
 };
 

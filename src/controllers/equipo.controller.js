@@ -115,6 +115,21 @@ const createEquipo = async (req, res) => {
       comentario,
     } = req.body;
 
+    const serieExistente = await db.query(
+      `
+      SELECT id_equipo
+      FROM Equipo
+      WHERE serie = $1
+      `,
+      [serie],
+    );
+
+    if (serieExistente.rows.length > 0) {
+      return res.status(400).json({
+        message: "El número de serie ya existe",
+      });
+    }
+
     const result = await db.query(
       `
       INSERT INTO Equipo (
@@ -183,6 +198,22 @@ const updateEquipo = async (req, res) => {
       termino_garantia,
       comentario,
     } = req.body;
+
+    const serieExistente = await db.query(
+      `
+      SELECT id_equipo
+      FROM Equipo
+      WHERE serie = $1
+        AND id_equipo <> $2
+      `,
+      [serie, id],
+    );
+
+    if (serieExistente.rows.length > 0) {
+      return res.status(400).json({
+        message: "El número de serie ya está registrado",
+      });
+    }
 
     const result = await db.query(
       `

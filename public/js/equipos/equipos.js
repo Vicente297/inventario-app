@@ -91,28 +91,25 @@ busquedaSerie.addEventListener("input", () => {
 });
 
 let ordenGarantia = false;
-
 function alternarOrden() {
-  const btn = document.querySelector(".btn-center button");
+  const btn = document.getElementById("btnGarantia");
 
   if (!ordenGarantia) {
-    const ordenados = [...equipos].sort((a, b) => {
+    const ordenar = [...equipos].sort((a, b) => {
       return new Date(a.termino_garantia) - new Date(b.termino_garantia);
     });
-
-    mostrarEquipos(ordenados);
+    mostrarEquipos(ordenar);
     ordenGarantia = true;
   } else {
     const ordenOriginal = [...equipos].sort(
       (a, b) => a.id_equipo - b.id_equipo,
     );
-
     mostrarEquipos(ordenOriginal);
     ordenGarantia = false;
   }
   btn.textContent = ordenGarantia
     ? "Volver al orden normal"
-    : "Ordenar por garantía";
+    : "Ordenar por garantia";
 }
 
 cargarEquipos();
