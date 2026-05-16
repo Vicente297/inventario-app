@@ -24,10 +24,12 @@ form.addEventListener("submit", async (e) => {
       return alert(data.message);
     }
 
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("rol", data.rol);
+    console.log(data);
 
-    if (data.rol === "admin") {
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("rol", data.rol?.trim().toLowerCase());
+
+    if (data.rol?.trim().toLowerCase() === "admin") {
       window.location.href = "/views/equipos/equipo.html";
     } else {
       window.location.href = "/views/asignaciones/asignaciones.html";
