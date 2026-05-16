@@ -1,6 +1,5 @@
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
-
 const form = document.getElementById("formAsignacion");
 const listaEquipos = document.getElementById("listaEquipos");
 const listaUsuarios = document.getElementById("listaUsuarios");

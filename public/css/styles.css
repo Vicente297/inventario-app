@@ -242,7 +242,7 @@ tbody tr:hover {
 .btn-detalle {
   background-color: rgb(15, 88, 184);
   color: white;
-  padding: 10px 20px;
+  padding: 3px 15px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -272,6 +272,21 @@ tbody tr:hover {
   font-size: 14px;
   display: block;
   margin-top: 4px;
+}
+
+.alerta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 30px;
+  margin: 20px auto;
+  font-size: 25px;
+  width: 60%;
 }
 
 .input-busqueda {

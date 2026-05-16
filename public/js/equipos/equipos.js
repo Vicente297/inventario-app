@@ -1,5 +1,13 @@
 const tabla = document.getElementById("tablaEquipos");
 const busquedaSerie = document.getElementById("busquedaSerie");
+const contenedorTabla = document.getElementById("tablaContainer");
+
+const rol = localStorage.getItem("rol");
+
+if (rol !== "admin") {
+  alert("Acceso denegado");
+  window.location.href = "/views/asignaciones/asignaciones.html";
+}
 
 let equipos = [];
 
@@ -10,9 +18,17 @@ function editarEquipo(id) {
 async function cargarEquipos() {
   try {
     const res = await fetch("/api/equipos");
+    const data = await res.json();
+    equipos = data;
 
-    equipos = await res.json();
-
+    if (!equipos || equipos.length === 0) {
+      contenedorTabla.innerHTML = `
+      <div class="alerta">
+      No existen equipos registrados
+      </div>
+      `;
+      return;
+    }
     mostrarEquipos(equipos);
   } catch (error) {
     console.error("Error:", error);
@@ -21,19 +37,23 @@ async function cargarEquipos() {
 
 async function eliminarEquipo(id) {
   if (!confirm("¿Estás seguro de eliminar este Equipo?")) return;
-
   try {
     const response = await fetch(`/api/equipos/${id}`, {
       method: "DELETE",
     });
-
     const data = await response.json();
 
     if (response.ok) {
-      equipos = equipos.filter((equipo) => equipo.id_equipo !== id);
-
+      equipos = equipos.filter((e) => e.id_equipo !== id);
       mostrarEquipos(equipos);
-
+      if (equipos.length === 0) {
+        contenedorTabla.innerHTML = `
+          <div class="alerta">
+            No existen equipos registrados
+          </div>
+        `;
+        return;
+      }
       alert(data.message);
     } else {
       alert("Error: " + data.message);

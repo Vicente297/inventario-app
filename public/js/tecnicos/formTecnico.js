@@ -2,6 +2,12 @@ const params = new URLSearchParams(window.location.search);
 const form = document.getElementById("formTecnico");
 const id = params.get("id");
 const mensajeError = document.getElementById("mensajeError");
+const rol = localStorage.getItem("rol");
+
+if (rol !== "admin") {
+  alert("Acceso denegado");
+  window.location.href = "/views/asignaciones/asignaciones.html";
+}
 
 if (id) {
   cargarTecnico();

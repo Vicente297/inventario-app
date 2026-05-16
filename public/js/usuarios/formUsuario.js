@@ -2,6 +2,13 @@ const params = new URLSearchParams(window.location.search);
 const form = document.getElementById("formUsuario");
 const id = params.get("id");
 
+const rol = localStorage.getItem("rol");
+
+if (rol !== "admin") {
+  window.location.href = "/views/asignaciones/asignaciones.html";
+  alert("Acceso denegado");
+}
+
 if (id) {
   cargarUsuario();
 }

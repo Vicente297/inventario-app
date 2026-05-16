@@ -1,6 +1,8 @@
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 const detalle = document.getElementById("detalleAsignacion");
+const rol = localStorage.getItem("rol") || "";
+const esAdmin = rol === "admin";
 
 async function cargarDetalle() {
   try {
@@ -37,12 +39,50 @@ async function cargarDetalle() {
         <p><strong>Fecha recepción:</strong> ${data.fecha_recepcion || "Pendiente"}</p>
 
       </div>
+      <div class="btn-container">
+      <button class="btn btn-detalle navbar">
+        <a href="#" onclick="history.back()">Volver</a>
+      </button>
+      ${
+        esAdmin
+          ? `
+        <button class="btn btn-eliminar" onclick="eliminarAsignacion(${id})">
+        Eliminar
+        </button>
+        `
+          : `
+        <button class="btn btn-eliminar" disable">
+        Eliminar
+        </button>
+        `
+      }
+      </div>
     `;
   } catch (error) {
     console.error(error);
     detalle.innerHTML = `
       <p>Error al cargar detalle</p>
     `;
+  }
+}
+
+async function eliminarAsignacion(id) {
+  if (!confirm("¿Estás seguro de eliminar esta asignacion?")) return;
+
+  try {
+    const response = await fetch(`/api/asignaciones/${id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      alert("Eliminado correctamente");
+      window.location.href = "/views/asignaciones/asignaciones.html";
+    } else {
+      const errorData = await response.json();
+      alert("Error: " + errorData.message);
+    }
+  } catch (error) {
+    console.error("Fetch error:", error);
   }
 }
 

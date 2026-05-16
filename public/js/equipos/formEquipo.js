@@ -1,6 +1,12 @@
 const params = new URLSearchParams(window.location.search);
 const form = document.getElementById("formEquipo");
 const id = params.get("id");
+const rol = localStorage.getItem("rol");
+
+if (rol !== "admin") {
+  alert("Acceso denegado");
+  window.location.href = "/views/asignaciones/asignaciones.html";
+}
 
 if (id) {
   cargarEquipo();
